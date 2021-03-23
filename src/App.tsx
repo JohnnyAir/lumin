@@ -1,38 +1,52 @@
-import * as React from "react"
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+import * as React from "react";
+import { ChakraProvider, Box, Flex, Heading, Text } from "@chakra-ui/react";
+import theme from "./theme";
+import { Cart } from "./cart/Cart";
+import ProductGrid from "./products/Products";
+import BrandSelect from "./components/Select";
+import Header from "./components/Header";
+import { useProductActions } from "./products/actions";
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
+export const App = () => {
+  const { fetchCurrencies } = useProductActions();
+
+  React.useEffect(() => {
+    fetchCurrencies();
+  }, [fetchCurrencies]);
+
+  return (
+    <ChakraProvider theme={theme}>
+      <Header />
+      <Box w="full" h="full">
+        <Box w="full" maxW="1300px" mx="auto" p="8">
+          <Flex
+            direction={["column", "row"]}
+            justify="space-between"
+            align={["flex-start", "flex-end"]}
+            py="16"
           >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+            <Box mb={["6", "0"]}>
+              <Heading
+                fontSize={["x-large", "4xl"]}
+                fontFamily="Prata"
+                lineHeight="2"
+              >
+                All Products
+              </Heading>
+              <Text>A 360° look at Lumin </Text>
+            </Box>
+            <Box w={["full", "96"]} pb="4">
+              <BrandSelect
+                size="xl"
+                w="full"
+                placeholder="Filter by"
+              ></BrandSelect>
+            </Box>
+          </Flex>
+        </Box>
+        <ProductGrid />
+      </Box>
+      <Cart />
+    </ChakraProvider>
+  );
+};
