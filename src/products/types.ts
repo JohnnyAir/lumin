@@ -1,13 +1,13 @@
-export interface Product {
+export interface IProduct {
   id: number;
   title: string;
   image_url: string;
   price: number;
-  formattedPrice?:string;
+  formattedPrice?: string;
 }
 
 export interface ProductData {
-  products: Product[];
+  products: IProduct[];
 }
 
 export interface ProductVars {
@@ -15,12 +15,6 @@ export interface ProductVars {
 }
 
 export interface ProductState {
-  currency: string;
   loading: boolean;
-  products: Product[];
-  currencies: string[];
-}
-
-export interface ProductProps extends Product {
-  addToCart: (id: number) => void;
+  products: IProduct[];
 }

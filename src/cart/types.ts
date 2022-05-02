@@ -1,14 +1,14 @@
-import { Product } from "../products/types";
+import { IProduct } from "../products/types";
 
-export interface Cart {
+export interface ICart {
   [index: number]: { qty: number };
 }
 
-export interface CartState {
-  cart: Cart;
+export interface ICartState {
+  cart: ICart;
   open: boolean;
 }
 
-export interface CartItemType extends Product {
+export interface ICartItem extends IProduct {
   qty: number;
 }

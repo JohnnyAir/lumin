@@ -1,12 +1,10 @@
 import React from "react";
 import { Box, Flex, Heading, HStack, Text, Icon } from "@chakra-ui/react";
 import { ReactComponent as CartIcon } from "../assets/svg/cart.svg";
-import { useCartValues } from "../cart/use-cart";
-import { useCartActions } from "../cart/actions";
+import { useCart } from "../cart/useCart";
 
 function Header() {
-  const { cartItemsCount } = useCartValues();
-  const { openCart } = useCartActions();
+  const { cartItemsCount, openCart } = useCart();
 
   return (
     <Box h="60px" boxShadow="0 2px 3px -3px;" px="14" py="2">

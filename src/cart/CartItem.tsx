@@ -2,9 +2,9 @@ import * as React from "react";
 import { Flex, Text, Grid, Image } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 import FormatAmount from "../components/FormatAmount";
-import { CartItemType } from "./types";
+import { ICartItem } from "./types";
 
-interface CartItemProps extends CartItemType {
+interface CartItemProps extends ICartItem {
   onIncreaseQuanity: (id: number) => void;
   onDecreaseQuanity: (id: number) => void;
   onRemoveItem: (id: number) => void;

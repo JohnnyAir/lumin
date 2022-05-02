@@ -1,15 +1,15 @@
 import React from "react";
 import BrandSelect from "./Select";
 import { SelectProps } from "@chakra-ui/react";
-import { useCurrency } from "../products/actions";
+import { useCurrencies } from "../currency/hooks";
 
 function CurrencySelect(props: SelectProps) {
-  const { currencies, currency, setCurrency } = useCurrency();
+  const { currencies, selectedCurrency, setCurrency } = useCurrencies();
 
   return (
     <BrandSelect
       onChange={(e) => setCurrency(e.target.value)}
-      value={currency}
+      value={selectedCurrency}
       {...props}
     >
       {currencies.map((currency) => (

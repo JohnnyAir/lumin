@@ -13,27 +13,26 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import BrandButton from "../components/Button";
-import { useCartValues } from "./use-cart";
+import { useCart } from "./useCart";
 import CartItem from "./CartItem";
-import { useCartActions } from "./actions";
 import FormatAmount from "../components/FormatAmount";
 import CurrencySelect from "../components/CurrencySelect";
 
-interface CartProps {
-}
+interface CartProps {}
 
 export function Cart(props: CartProps) {
   const {
+    open,
+    subTotal,
+    cartItems,
     increaseItemQuantiy,
     decreaseItemQuantiy,
     removeFromCart,
     closeCart,
-  } = useCartActions();
-
-  const cart = useCartValues();
+  } = useCart();
 
   return (
-    <Drawer onClose={closeCart} isOpen={cart.open} size="md">
+    <Drawer onClose={closeCart} isOpen={open} size="md">
       <DrawerOverlay>
         <DrawerContent bg="#F2F3F0">
           <DrawerHeader>
@@ -59,8 +58,8 @@ export function Cart(props: CartProps) {
           </DrawerHeader>
           <DrawerBody>
             <Stack>
-              {cart.cartItems.length > 0 ? (
-                cart.cartItems.map((item) => (
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => (
                   <CartItem
                     key={item.id}
                     {...item}
@@ -79,7 +78,7 @@ export function Cart(props: CartProps) {
               <Divider borderColor="brand.500" />
               <Flex justify="space-between" my="4">
                 <Text>Subtotal</Text>
-                <FormatAmount amount={cart.subTotal} />
+                <FormatAmount amount={subTotal} />
               </Flex>
               <Flex direction="column">
                 <BrandButton variant="outline" my="2" w="full" size="lg">

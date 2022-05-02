@@ -5,15 +5,8 @@ import { Cart } from "./cart/Cart";
 import ProductGrid from "./products/Products";
 import BrandSelect from "./components/Select";
 import Header from "./components/Header";
-import { useProductActions } from "./products/actions";
 
 export const App = () => {
-  const { fetchCurrencies } = useProductActions();
-
-  React.useEffect(() => {
-    fetchCurrencies();
-  }, [fetchCurrencies]);
-
   return (
     <ChakraProvider theme={theme}>
       <Header />

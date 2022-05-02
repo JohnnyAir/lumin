@@ -1,32 +1,27 @@
 import React from "react";
 import { Flex, Text, Spinner, Box, Image } from "@chakra-ui/react";
 import BrandButton from "../components/Button";
-import { useAppSelector } from "../app/hooks";
-import { useProductActions } from "./actions";
-import { ProductProps } from "./types";
+import { IProduct } from "./types";
 import { useCartActions } from "../cart/actions";
 import FormatAmount from "../components/FormatAmount";
+import useProducts from "./useProducts";
 
 const ProductGrid = () => {
-  const state = useAppSelector((state) => state.product);
-  const { fetchProducts } = useProductActions();
+  const { products, isFetchingProducts } = useProducts();
   const { addToCart } = useCartActions();
 
-  React.useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
-
-  if (state.loading)
+  if (isFetchingProducts) {
     return (
       <Flex w="full" justify="center">
         <Spinner size="lg" />
       </Flex>
     );
+  }
 
   return (
     <Box w="full" bg="#E2E6E3">
       <Flex flexWrap="wrap" maxW="1300px" mx="auto">
-        {state.products.map((product) => (
+        {products.map((product) => (
           <Product
             key={product.id}
             {...product}
@@ -37,6 +32,10 @@ const ProductGrid = () => {
     </Box>
   );
 };
+
+interface ProductProps extends IProduct {
+  addToCart: (id: number) => void;
+}
 
 const Product: React.FC<ProductProps> = (props) => {
   return (

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartState } from "./types";
+import { ICartState } from "./types";
 
-const initialState: CartState = {
+const initialState: ICartState = {
   cart: {},
   open: false,
 };

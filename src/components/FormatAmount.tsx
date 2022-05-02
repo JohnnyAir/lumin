@@ -1,13 +1,13 @@
 import React from "react";
 import { Text, TextProps } from "@chakra-ui/react";
-import { useAppSelector } from "../app/hooks";
+import { useCurrency } from "../currency/hooks";
 
 interface Props extends TextProps {
   amount: number;
 }
 
 function FormatAmount(props: Props) {
-  const currency = useAppSelector((state) => state.product.currency);
+  const currency = useCurrency();
   const { amount, ...textProps } = props;
 
   return (
