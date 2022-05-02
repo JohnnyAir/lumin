@@ -12,28 +12,32 @@ export const cartSlice = createSlice({
   reducers: {
     loadCart: (state) => {},
     addToCart: (state, action: PayloadAction<number>) => {
-      const item = state.cart[action.payload];
+      const productId = action.payload;
+      const item = state.cart[productId];
       if (item) {
         item.qty += 1;
       } else {
-        state.cart[action.payload] = { qty: 1 };
+        state.cart[productId] = { qty: 1 };
       }
       state.open = true;
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
-      const item = state.cart[action.payload];
+      const productId = action.payload;
+      const item = state.cart[productId];
       if (item) {
-        delete state.cart[action.payload];
+        delete state.cart[productId];
       }
     },
     increaseItemQuantiy: (state, action: PayloadAction<number>) => {
-      const item = state.cart[action.payload];
+      const productId = action.payload;
+      const item = state.cart[productId];
       if (item) {
         item.qty += 1;
       }
     },
     decreaseItemQuantiy: (state, action: PayloadAction<number>) => {
-      const item = state.cart[action.payload];
+      const productId = action.payload;
+      const item = state.cart[productId];
       if (item && item.qty > 1) {
         item.qty -= 1;
       }
